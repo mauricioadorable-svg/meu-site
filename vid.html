@@ -81,6 +81,49 @@
 
 
     <style>
+
+
+       /* BOTÃO PREMIUM */
+        .cta-btn {
+            display: inline-block;
+            padding: 18px 35px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #000;
+            text-decoration: none;
+            border-radius: 50px;
+            background: linear-gradient(135deg, #FFD700, #FFA500, #FF8C00);
+            box-shadow: 0 0 20px rgba(255, 165, 0, 0.6);
+            transition: all 0.3s ease;
+            animation: pulseGlow 2s infinite;
+        }
+
+        /* HOVER */
+        .cta-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.9);
+        }
+
+        /* ANIMAÇÃO GLOW */
+        @keyframes pulseGlow {
+            0% {
+                box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 30px rgba(255, 215, 0, 1);
+            }
+
+            100% {
+                box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
+            }
+        }
+
+
+
+
+
+        
         .notif-wpp {
             position: fixed;
             top: 0;
