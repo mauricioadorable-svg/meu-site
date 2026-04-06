@@ -63,49 +63,93 @@
         </a>
     </div>
 
-    <style>
-        /* BOTÃO PREMIUM */
-        .cta-btn {
-            display: inline-block;
-            padding: 18px 35px;
-            font-size: 18px;
-            font-weight: bold;
-            color: #000;
-            text-decoration: none;
-            border-radius: 50px;
-            background: linear-gradient(135deg, #FFD700, #FFA500, #FF8C00);
-            box-shadow: 0 0 20px rgba(255, 165, 0, 0.6);
-            transition: all 0.3s ease;
-            animation: pulseGlow 2s infinite;
-        }
 
-        /* HOVER */
-        .cta-btn:hover {
-            transform: scale(1.08);
-            box-shadow: 0 0 30px rgba(255, 215, 0, 0.9);
-        }
 
-        /* ANIMAÇÃO GLOW */
-        @keyframes pulseGlow {
-            0% {
-                box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
-            }
 
-            50% {
-                box-shadow: 0 0 30px rgba(255, 215, 0, 1);
-            }
+    <!-- CONTADOR ONLINE -->
+    <div id="online-box">👥 <span id="online-count">127</span> pessoas online agora</div>
 
-            100% {
-                box-shadow: 0 0 10px rgba(255, 165, 0, 0.5);
-            }
-        }
-    </style>
+    <!-- NOTIFICAÇÃO -->
+    <div id="notif-wpp" class="notif-wpp">
+        <div class="emoji" style="font-size: 18px;">✅</div>
+        <div class="notif-texto">
+            <strong id="notif-nome"></strong>
+            <span id="notif-msg"></span>
+        </div>
+    </div>
+
+
 
     <script>
         // TEMPO: 6min e 27s = 387 segundos
         setTimeout(function () {
             document.getElementById("cta-container").style.display = "block";
         }, 387000);
+    </script>
+
+    <script>
+        const pessoas = [
+            { nome: "Carlos" },
+            { nome: "Ana" },
+            { nome: "Domingos" },
+            { nome: "Edna" },
+            { nome: "Manuel" },
+            { nome: "Fátima" }
+        ];
+
+        const provincias = [
+            "Luanda", "Benguela", "Huambo", "Huíla",
+            "Huambo", "Malanje"
+        ];
+
+        // VALORES FIXOS NA ORDEM
+        const valores = [100000, 87000, 67000, 150000, 49000, 32000, 89000];
+
+        let indexValor = 0;
+
+        function formatarKz(valor) {
+            return valor.toLocaleString('pt-PT') + " Kz";
+        }
+
+        function mostrarNotif() {
+            const pessoa = pessoas[Math.floor(Math.random() * pessoas.length)];
+            const provincia = provincias[Math.floor(Math.random() * provincias.length)];
+
+            const valor = valores[indexValor];
+            indexValor = (indexValor + 1) % valores.length;
+
+            document.getElementById("notif-nome").innerText = pessoa.nome;
+            document.getElementById("notif-msg").innerText =
+                `da província de ${provincia} acabou de levantar ${formatarKz(valor)}`;
+
+            const box = document.getElementById("notif-wpp");
+
+            box.style.display = "flex";
+            box.classList.remove("notif-hide");
+            box.classList.add("notif-show");
+
+            setTimeout(() => {
+                box.classList.remove("notif-show");
+                box.classList.add("notif-hide");
+
+                setTimeout(() => {
+                    box.style.display = "none";
+                }, 500);
+            }, 4000);
+        }
+        // CONTADOR ONLINE DINÂMICO
+        function atualizarOnline() {
+            const numero = Math.floor(Math.random() * (320 - 120)) + 120;
+            document.getElementById("online-count").innerText = numero;
+        }
+
+        setInterval(atualizarOnline, 3000);
+
+        // primeira notificação
+        setTimeout(mostrarNotif, 5000);
+
+        // repetir notificações
+        setInterval(mostrarNotif, 8000);
     </script>
 
 
